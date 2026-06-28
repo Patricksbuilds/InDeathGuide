@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* ── TOKEN SYSTEM ── */
     :root {
       --black:        #0a0805;
       --stone-dark:   #111009;
@@ -22,16 +21,13 @@
       --ash:          #9c9488;
       --parchment:    #d4c9a8;
       --white:        #f0ead8;
-
       --font-display: 'Cinzel Decorative', serif;
       --font-title:   'Cinzel', serif;
       --font-body:    'EB Garamond', serif;
-
-      --section-pad: clamp(3rem, 8vw, 7rem);
-      --content-max: 1100px;
+      --section-pad:  clamp(3rem, 8vw, 7rem);
+      --content-max:  1100px;
     }
 
-    /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
@@ -44,7 +40,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -64,7 +59,6 @@
       border-bottom: 1px solid var(--gold-dim);
       backdrop-filter: blur(8px);
     }
-
     .nav-inner {
       max-width: var(--content-max);
       margin: 0 auto;
@@ -74,7 +68,6 @@
       justify-content: space-between;
       gap: 1rem;
     }
-
     .nav-logo {
       font-family: var(--font-title);
       font-size: 0.85rem;
@@ -84,13 +77,7 @@
       text-decoration: none;
       text-transform: uppercase;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-family: var(--font-title);
       font-size: 0.72rem;
@@ -100,7 +87,6 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--gold); }
 
     /* ── HERO ── */
@@ -116,25 +102,39 @@
       overflow: hidden;
     }
 
-    /* Radial vignette from center */
-    .hero::after {
+    /* Hero background image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero-bg.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      background-repeat: no-repeat;
+      transform: scale(1.03);
+    }
+
+    /* Dark overlays to make text readable while preserving image drama */
+    .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, rgba(10,8,5,0.5) 70%, var(--black) 100%),
-        radial-gradient(ellipse 80% 40% at 50% 100%, var(--crimson-dim) 0%, transparent 60%);
-      pointer-events: none;
+        linear-gradient(180deg,
+          rgba(10,8,5,0.55) 0%,
+          rgba(10,8,5,0.25) 40%,
+          rgba(10,8,5,0.55) 75%,
+          rgba(10,8,5,0.92) 100%),
+        radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(10,8,5,0.4) 100%);
     }
 
-    /* Animated ember particles */
+    /* Ember particles */
     .embers {
       position: absolute;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
     }
-
     .ember {
       position: absolute;
       bottom: -10px;
@@ -145,7 +145,6 @@
       animation: rise linear infinite;
       opacity: 0;
     }
-
     @keyframes rise {
       0%   { transform: translateY(0) translateX(0); opacity: 0; }
       10%  { opacity: 0.8; }
@@ -153,7 +152,25 @@
       100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
     }
 
-    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    /* Season 2024 badge */
+    .season-badge {
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .season-badge img {
+      height: 90px;
+      width: auto;
+      filter:
+        invert(1)
+        drop-shadow(0 2px 12px rgba(201,168,76,0.5));
+      opacity: 0.92;
+    }
 
     .hero-eyebrow {
       font-family: var(--font-title);
@@ -163,7 +180,6 @@
       color: var(--gold-dim);
       margin-bottom: 1.5rem;
     }
-
     .hero-title {
       font-family: var(--font-display);
       font-size: clamp(2.2rem, 6vw, 4.5rem);
@@ -171,9 +187,8 @@
       color: var(--white);
       line-height: 1.1;
       margin-bottom: 0.4rem;
-      text-shadow: 0 0 60px rgba(201,168,76,0.2);
+      text-shadow: 0 2px 30px rgba(0,0,0,0.8), 0 0 60px rgba(201,168,76,0.15);
     }
-
     .hero-subtitle {
       font-family: var(--font-display);
       font-size: clamp(1rem, 2.5vw, 1.6rem);
@@ -181,9 +196,9 @@
       color: var(--gold);
       letter-spacing: 0.05em;
       margin-bottom: 2rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.9);
     }
 
-    /* The signature element: a gothic rule divider with a crossbow bolt motif */
     .rune-divider {
       display: flex;
       align-items: center;
@@ -193,7 +208,6 @@
       width: 100%;
       max-width: 500px;
     }
-
     .rune-divider::before,
     .rune-divider::after {
       content: '';
@@ -201,7 +215,6 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
     }
-
     .rune-divider span {
       font-family: var(--font-title);
       color: var(--gold);
@@ -215,8 +228,8 @@
       max-width: 620px;
       margin: 0 auto 2.5rem;
       font-style: italic;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
     }
-
     .hero-cta {
       display: inline-flex;
       align-items: center;
@@ -232,11 +245,7 @@
       transition: background 0.2s, transform 0.2s;
       clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
     }
-
-    .hero-cta:hover {
-      background: var(--gold-glow);
-      transform: translateY(-2px);
-    }
+    .hero-cta:hover { background: var(--gold-glow); transform: translateY(-2px); }
 
     /* ── SECTION BASE ── */
     section {
@@ -244,12 +253,7 @@
       z-index: 1;
       padding: var(--section-pad) 2rem;
     }
-
-    .section-inner {
-      max-width: var(--content-max);
-      margin: 0 auto;
-    }
-
+    .section-inner { max-width: var(--content-max); margin: 0 auto; }
     .section-label {
       font-family: var(--font-title);
       font-size: 0.68rem;
@@ -258,7 +262,6 @@
       color: var(--gold-dim);
       margin-bottom: 0.6rem;
     }
-
     .section-title {
       font-family: var(--font-title);
       font-size: clamp(1.5rem, 3vw, 2.4rem);
@@ -267,36 +270,26 @@
       margin-bottom: 1rem;
       line-height: 1.2;
     }
-
     .section-title span { color: var(--gold); }
-
     .section-body {
       color: var(--parchment);
       font-size: 1.05rem;
       line-height: 1.85;
       max-width: 780px;
     }
-
     .section-body p + p { margin-top: 1.1rem; }
 
-    /* ── STONE DIVIDER ── */
     .stone-divider {
       width: 100%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--stone-light), var(--gold-dim), var(--stone-light), transparent);
-      margin: 0;
     }
 
-    /* ── WHAT IS THIS GAME ── */
-    .overview-section {
-      background: var(--stone-dark);
-    }
+    /* ── OVERVIEW ── */
+    .overview-section { background: var(--stone-dark); }
 
-    /* ── WORLD CARDS ── */
-    .worlds-section {
-      background: var(--black);
-    }
-
+    /* ── WORLDS ── */
+    .worlds-section { background: var(--black); }
     .worlds-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -304,7 +297,6 @@
       margin-top: 3rem;
       border: 1.5px solid var(--stone-light);
     }
-
     .world-card {
       background: var(--stone-dark);
       padding: 2rem 1.6rem;
@@ -312,7 +304,6 @@
       overflow: hidden;
       transition: background 0.3s;
     }
-
     .world-card::before {
       content: '';
       position: absolute;
@@ -323,10 +314,8 @@
       transition: transform 0.3s;
       transform-origin: left;
     }
-
     .world-card:hover { background: var(--stone-mid); }
     .world-card:hover::before { transform: scaleX(1); }
-
     .world-number {
       font-family: var(--font-title);
       font-size: 0.62rem;
@@ -335,7 +324,6 @@
       text-transform: uppercase;
       margin-bottom: 0.8rem;
     }
-
     .world-name {
       font-family: var(--font-title);
       font-size: 1.15rem;
@@ -343,7 +331,6 @@
       color: var(--gold);
       margin-bottom: 0.5rem;
     }
-
     .world-boss {
       font-family: var(--font-title);
       font-size: 0.68rem;
@@ -352,18 +339,10 @@
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
+    .world-desc { font-size: 0.95rem; color: var(--ash); line-height: 1.7; }
 
-    .world-desc {
-      font-size: 0.95rem;
-      color: var(--ash);
-      line-height: 1.7;
-    }
-
-    /* ── ROGUELITE LOOP ── */
-    .loop-section {
-      background: var(--stone-dark);
-    }
-
+    /* ── LOOP ── */
+    .loop-section { background: var(--stone-dark); }
     .loop-steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -371,26 +350,17 @@
       margin-top: 3rem;
       position: relative;
     }
-
     .loop-steps::before {
       content: '';
       position: absolute;
       top: 2.5rem;
-      left: 10%;
-      right: 10%;
+      left: 10%; right: 10%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
     }
-
-    .loop-step {
-      text-align: center;
-      padding: 0 1.5rem 2rem;
-      position: relative;
-    }
-
+    .loop-step { text-align: center; padding: 0 1.5rem 2rem; position: relative; }
     .loop-icon {
-      width: 5rem;
-      height: 5rem;
+      width: 5rem; height: 5rem;
       border: 1px solid var(--gold-dim);
       border-radius: 50%;
       display: flex;
@@ -402,7 +372,6 @@
       position: relative;
       z-index: 1;
     }
-
     .loop-step-title {
       font-family: var(--font-title);
       font-size: 0.85rem;
@@ -411,18 +380,10 @@
       letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
     }
+    .loop-step-desc { font-size: 0.9rem; color: var(--ash); line-height: 1.6; }
 
-    .loop-step-desc {
-      font-size: 0.9rem;
-      color: var(--ash);
-      line-height: 1.6;
-    }
-
-    /* ── WEAPONS INTRO ── */
-    .weapons-section {
-      background: var(--black);
-    }
-
+    /* ── WEAPONS ── */
+    .weapons-section { background: var(--black); }
     .weapons-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -430,12 +391,7 @@
       margin-top: 3rem;
       border: 1.5px solid var(--stone-light);
     }
-
-    .weapon-card {
-      background: var(--stone-dark);
-      padding: 2.5rem 2rem;
-    }
-
+    .weapon-card { background: var(--stone-dark); padding: 2.5rem 2rem; }
     .weapon-name {
       font-family: var(--font-title);
       font-size: 1.3rem;
@@ -443,7 +399,6 @@
       color: var(--gold);
       margin-bottom: 0.3rem;
     }
-
     .weapon-unlock {
       font-family: var(--font-title);
       font-size: 0.65rem;
@@ -452,26 +407,17 @@
       color: var(--crimson);
       margin-bottom: 1.2rem;
     }
+    .weapon-desc { color: var(--ash); font-size: 0.97rem; line-height: 1.75; }
 
-    .weapon-desc {
-      color: var(--ash);
-      font-size: 0.97rem;
-      line-height: 1.75;
-    }
-
-    /* ── SIEGE OF HEAVEN ── */
-    .siege-section {
-      background: var(--stone-dark);
-    }
-
+    /* ── SIEGE ── */
+    .siege-section { background: var(--stone-dark); }
     .siege-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
     }
-
-    .siege-badge {
+    .siege-badge-label {
       display: inline-block;
       font-family: var(--font-title);
       font-size: 0.65rem;
@@ -482,160 +428,27 @@
       padding: 0.3rem 0.8rem;
       margin-bottom: 1rem;
     }
-
-    .siege-features {
-      list-style: none;
-      margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .siege-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      font-size: 0.97rem;
-      color: var(--ash);
-    }
-
-    .siege-features li::before {
-      content: '✦';
-      color: var(--gold-dim);
-      font-size: 0.7rem;
-      margin-top: 0.35rem;
-      flex-shrink: 0;
-    }
-
-    .siege-stat-block {
-      background: var(--black);
-      border: 1px solid var(--stone-light);
-      padding: 2.5rem;
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--stone-light);
-    }
-
+    .siege-features { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .siege-features li { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.97rem; color: var(--ash); }
+    .siege-features li::before { content: '✦'; color: var(--gold-dim); font-size: 0.7rem; margin-top: 0.35rem; flex-shrink: 0; }
+    .siege-stat-block { background: var(--black); border: 1px solid var(--stone-light); padding: 2.5rem; }
+    .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--stone-light); }
     .stat-row:last-child { border-bottom: none; }
+    .stat-label { font-family: var(--font-title); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ash); }
+    .stat-value { font-family: var(--font-title); font-size: 1.1rem; font-weight: 700; color: var(--gold); }
 
-    .stat-label {
-      font-family: var(--font-title);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ash);
-    }
+    /* ── PROGRESS ── */
+    .progress-visual { margin: 3rem auto; max-width: 700px; }
+    .progress-track { height: 4px; background: var(--stone-light); position: relative; margin: 2rem 0 1rem; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--crimson), var(--gold)); width: 0%; transition: width 1.5s ease; }
+    .progress-milestones { display: flex; justify-content: space-between; }
+    .milestone { text-align: center; flex: 1; }
+    .milestone-pct { font-family: var(--font-title); font-size: 0.72rem; color: var(--gold-dim); letter-spacing: 0.1em; }
+    .milestone-label { font-family: var(--font-title); font-size: 0.62rem; color: var(--ash); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
 
-    .stat-value {
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    /* ── DEATH PHILOSOPHY ── */
-    .death-section {
-      background: var(--black);
-      text-align: center;
-    }
-
-    .death-quote {
-      font-family: var(--font-body);
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-style: italic;
-      color: var(--parchment);
-      max-width: 700px;
-      margin: 2rem auto;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    .death-quote::before {
-      content: '\201C';
-      font-size: 5rem;
-      color: var(--gold-dim);
-      position: absolute;
-      top: -1.5rem;
-      left: -1rem;
-      line-height: 1;
-      font-family: var(--font-body);
-    }
-
-    .death-body {
-      max-width: 720px;
-      margin: 0 auto;
-      color: var(--ash);
-      font-size: 1.05rem;
-    }
-
-    .death-body p + p { margin-top: 1rem; }
-
-    /* ── PROGRESS BAR VISUAL ── */
-    .progress-visual {
-      margin: 3rem auto;
-      max-width: 700px;
-    }
-
-    .progress-track {
-      height: 4px;
-      background: var(--stone-light);
-      position: relative;
-      margin: 2rem 0 1rem;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--crimson), var(--gold));
-      width: 0%;
-      transition: width 1.5s ease;
-    }
-
-    .progress-milestones {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .milestone {
-      text-align: center;
-      flex: 1;
-    }
-
-    .milestone-pct {
-      font-family: var(--font-title);
-      font-size: 0.72rem;
-      color: var(--gold-dim);
-      letter-spacing: 0.1em;
-    }
-
-    .milestone-label {
-      font-family: var(--font-title);
-      font-size: 0.62rem;
-      color: var(--ash);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 0.2rem;
-    }
-
-    /* ── COMING SOON TEASE ── */
-    .coming-section {
-      background: var(--stone-dark);
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    .coming-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-
+    /* ── COMING SOON ── */
+    .coming-section { background: var(--stone-dark); text-align: center; padding: 4rem 2rem; }
+    .coming-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2.5rem; }
     .coming-pill {
       font-family: var(--font-title);
       font-size: 0.7rem;
@@ -646,11 +459,7 @@
       padding: 0.6rem 1.4rem;
       transition: border-color 0.2s, color 0.2s;
     }
-
-    .coming-pill:hover {
-      border-color: var(--gold-dim);
-      color: var(--gold);
-    }
+    .coming-pill:hover { border-color: var(--gold-dim); color: var(--gold); }
 
     /* ── FOOTER ── */
     footer {
@@ -659,33 +468,12 @@
       padding: 2.5rem 2rem;
       text-align: center;
     }
-
-    .footer-logo {
-      font-family: var(--font-title);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-note {
-      font-size: 0.82rem;
-      color: var(--stone-light);
-      filter: brightness(2);
-    }
+    .footer-logo { font-family: var(--font-title); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.8rem; }
+    .footer-note { font-size: 0.82rem; color: var(--stone-light); filter: brightness(2); }
 
     /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -693,12 +481,13 @@
       .weapons-grid { grid-template-columns: 1fr; }
       .siege-inner { grid-template-columns: 1fr; gap: 2rem; }
       .loop-steps::before { display: none; }
+      .season-badge img { height: 65px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       .ember { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .progress-fill { transition: none; }
+      .hero-bg { transform: none; }
     }
   </style>
 </head>
@@ -720,9 +509,16 @@
 
   <!-- HERO -->
   <header class="hero" id="top">
+    <div class="hero-bg"></div>
     <div class="embers" id="embers"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Meta Quest · Superbright · 2024 Edition</p>
+
+      <!-- Summer Season 2024 badge from captured image -->
+      <div class="season-badge">
+        <img src="season-2024.jpg" alt="Summer Season 2024" />
+      </div>
+
+      <p class="hero-eyebrow">Meta Quest · Superbright · Unofficial Fan Guide</p>
       <h1 class="hero-title">In Death</h1>
       <p class="hero-subtitle">Unchained</p>
       <div class="rune-divider"><span>✦ ✦ ✦</span></div>
@@ -764,7 +560,7 @@
           <p class="world-number">World II</p>
           <p class="world-name">Desolation</p>
           <p class="world-boss">Boss — Anakim the Abominable</p>
-          <p class="world-desc">An alternate route added in free DLC — mysterious outdoor catacombs and confined underground passages. Four enemy types found nowhere else, including fast-moving aerial threats that punish hesitation. An alternate path to the first boss.</p>
+          <p class="world-desc">Mysterious outdoor catacombs and confined underground passages added in free DLC. Four enemy types found nowhere else, including fast-moving aerial threats that punish hesitation. An alternate path to the first boss that doubles early game content.</p>
         </div>
         <div class="world-card reveal">
           <p class="world-number">World III</p>
@@ -776,7 +572,7 @@
           <p class="world-number">World IV</p>
           <p class="world-name">The Abyss</p>
           <p class="world-boss">Boss — Asmodeus the Destroyer</p>
-          <p class="world-desc">The deep end. Hell made architecture. The game's ultimate challenge and the gate to Purgatory II. Defeating Asmodeus unlocks the Wrath of God arrow — the most powerful in the game, and your reward for surviving the worst the afterlife can offer.</p>
+          <p class="world-desc">The deep end. Hell made architecture. The game's ultimate challenge and the gate to Purgatory II. Defeating Asmodeus unlocks the Wrath of God arrow — the most powerful in the game, your reward for surviving the worst the afterlife can offer.</p>
         </div>
       </div>
     </div>
@@ -792,7 +588,6 @@
       <div class="section-body reveal">
         <p>In Death: Unchained is a roguelite — a game where permanent death is a feature, not a punishment. Each run you push further, unlock achievements, and accumulate progress that carries forward even when you fall. The further you get, the harder the enemies become. The more you play, the more arrows, enemy types, and challenges unlock.</p>
       </div>
-
       <div class="loop-steps">
         <div class="loop-step reveal">
           <div class="loop-icon">⚔️</div>
@@ -807,7 +602,7 @@
         <div class="loop-step reveal">
           <div class="loop-icon">💀</div>
           <p class="loop-step-title">Die</p>
-          <p class="loop-step-desc">You will die. Often. But every kill, every achievement milestone, and every gold piece looted in that run contributes permanently to your progress.</p>
+          <p class="loop-step-desc">You will die. Often. But every kill, every achievement milestone, and every gold piece looted contributes permanently to your overall progress.</p>
         </div>
         <div class="loop-step reveal">
           <div class="loop-icon">✦</div>
@@ -815,29 +610,16 @@
           <p class="loop-step-desc">Achievements unlock new arrows, new enemy types, new challenges. Your overall progress percentage climbs. The game genuinely grows as you do.</p>
         </div>
       </div>
-
       <div class="progress-visual reveal" id="progress-visual">
         <p class="section-label" style="text-align:center; margin-bottom:0.5rem;">Overall Progress Unlocks</p>
         <div class="progress-track">
           <div class="progress-fill" id="progress-fill"></div>
         </div>
         <div class="progress-milestones">
-          <div class="milestone">
-            <p class="milestone-pct">0%</p>
-            <p class="milestone-label">Start</p>
-          </div>
-          <div class="milestone">
-            <p class="milestone-pct">20%</p>
-            <p class="milestone-label">Paradise Lost</p>
-          </div>
-          <div class="milestone">
-            <p class="milestone-pct">40%</p>
-            <p class="milestone-label">The Abyss</p>
-          </div>
-          <div class="milestone">
-            <p class="milestone-pct">100%</p>
-            <p class="milestone-label">True Mastery</p>
-          </div>
+          <div class="milestone"><p class="milestone-pct">0%</p><p class="milestone-label">Start</p></div>
+          <div class="milestone"><p class="milestone-pct">20%</p><p class="milestone-label">Paradise Lost</p></div>
+          <div class="milestone"><p class="milestone-pct">40%</p><p class="milestone-label">The Abyss</p></div>
+          <div class="milestone"><p class="milestone-pct">100%</p><p class="milestone-label">True Mastery</p></div>
         </div>
       </div>
     </div>
@@ -855,12 +637,12 @@
         <div class="weapon-card reveal">
           <p class="weapon-name">The Longbow</p>
           <p class="weapon-unlock">Available from the start</p>
-          <p class="weapon-desc">The purist's weapon. Draw strength determines damage — a full draw headshot at range hits significantly harder than a rushed close shot. Rewards patience, accuracy, and a consistent anchor point. At range, no weapon in the game is more satisfying. The natural choice for those who want precision to matter.</p>
+          <p class="weapon-desc">The purist's weapon. Draw strength determines damage — a full draw headshot at range hits significantly harder than a rushed close shot. Rewards patience, accuracy, and a consistent anchor point. At range, no weapon in the game is more satisfying.</p>
         </div>
         <div class="weapon-card reveal">
           <p class="weapon-name">The Crossbow</p>
           <p class="weapon-unlock">Unlocked after 101 kills</p>
-          <p class="weapon-desc">Rapid fire, fixed maximum damage per bolt, loaded with a single hand motion then aimed like a pistol. Sidesteps the Quest's inside-out tracking limitations on wide bow draws. Favoured by high-score leaderboard players and experienced archers who want throughput over precision. The shield and teleport shard controls swap hands when using the crossbow.</p>
+          <p class="weapon-desc">Rapid fire, fixed maximum damage per bolt, loaded with a single hand motion then aimed like a pistol. Favoured by high-score leaderboard players. The shield and teleport shard controls swap hands when using the crossbow — something to get used to.</p>
         </div>
       </div>
     </div>
@@ -873,10 +655,10 @@
     <div class="section-inner">
       <div class="siege-inner">
         <div class="reveal">
-          <span class="siege-badge">Alternative Mode</span>
+          <span class="siege-badge-label">Alternative Mode</span>
           <p class="section-label">Game Mode</p>
           <h2 class="section-title">Siege of <span>Heaven</span></h2>
-          <p class="section-body">Not every session needs to be a full roguelite run. Siege of Heaven is a wave-defence mode — you hold a fixed position and fight off escalating waves of enemies rather than navigating procedurally generated worlds. It has its own separate achievement track (72 achievements), its own leaderboard, and was designed as a more accessible entry point. Chapter II maps added new unique mechanics to each Siege map.</p>
+          <p class="section-body">Not every session needs to be a full roguelite run. Siege of Heaven is a wave-defence mode — you hold a fixed position and fight off escalating waves of enemies rather than navigating procedurally generated worlds. It has its own separate achievement track, its own leaderboard, and was designed as a more accessible entry point to the game.</p>
           <ul class="siege-features">
             <li>Stand your ground — no teleport navigation required</li>
             <li>Escalating enemy waves with elite variants</li>
@@ -887,30 +669,12 @@
           </ul>
         </div>
         <div class="siege-stat-block reveal">
-          <div class="stat-row">
-            <span class="stat-label">Main Mode Achievements</span>
-            <span class="stat-value">138</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Siege Achievements</span>
-            <span class="stat-value">72</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Arrow Types</span>
-            <span class="stat-value">29+</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Worlds</span>
-            <span class="stat-value">4</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Boss Encounters</span>
-            <span class="stat-value">3</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Platform</span>
-            <span class="stat-value">Quest Exclusive</span>
-          </div>
+          <div class="stat-row"><span class="stat-label">Main Mode Achievements</span><span class="stat-value">138</span></div>
+          <div class="stat-row"><span class="stat-label">Siege Achievements</span><span class="stat-value">72</span></div>
+          <div class="stat-row"><span class="stat-label">Arrow Types</span><span class="stat-value">29+</span></div>
+          <div class="stat-row"><span class="stat-label">Worlds</span><span class="stat-value">4</span></div>
+          <div class="stat-row"><span class="stat-label">Boss Encounters</span><span class="stat-value">3</span></div>
+          <div class="stat-row"><span class="stat-label">Platform</span><span class="stat-value">Quest Exclusive</span></div>
         </div>
       </div>
     </div>
@@ -923,7 +687,7 @@
     <div class="section-inner">
       <p class="section-label reveal">This guide is growing</p>
       <h2 class="section-title reveal">More <span>Sections</span> Coming</h2>
-      <p class="section-body reveal" style="margin: 0 auto 1rem; text-align:center;">Arrow guides, enemy bestiary, zone walkthroughs, gameplay videos, and boss strategies — all built for the 2024 Quest version.</p>
+      <p class="section-body reveal" style="margin: 0 auto 1rem; text-align:center;">Arrow guides, enemy bestiary, zone walkthroughs, gameplay videos, and boss strategies — all built for the Summer Season 2024 Quest version.</p>
       <div class="coming-grid">
         <div class="coming-pill">Arrow Guide</div>
         <div class="coming-pill">Enemy Bestiary</div>
@@ -941,22 +705,20 @@
 
   <!-- FOOTER -->
   <footer>
-    <p class="footer-logo">In Death: Unchained — Unofficial Guide</p>
+    <p class="footer-logo">In Death: Unchained — Unofficial Fan Guide</p>
     <p class="footer-note">Fan-made guide. Not affiliated with Superbright or Meta. All game content belongs to their respective owners.</p>
   </footer>
 
   <script>
-    // ── EMBER PARTICLES ──
+    // Ember particles
     const emberContainer = document.getElementById('embers');
-    const EMBER_COUNT = 25;
-    for (let i = 0; i < EMBER_COUNT; i++) {
+    for (let i = 0; i < 25; i++) {
       const e = document.createElement('div');
       e.className = 'ember';
       const size = Math.random() * 2 + 1;
       e.style.cssText = `
         left: ${Math.random() * 100}%;
-        width: ${size}px;
-        height: ${size}px;
+        width: ${size}px; height: ${size}px;
         animation-duration: ${6 + Math.random() * 10}s;
         animation-delay: ${Math.random() * 8}s;
         --drift: ${(Math.random() - 0.5) * 120}px;
@@ -966,7 +728,7 @@
       emberContainer.appendChild(e);
     }
 
-    // ── SCROLL REVEAL ──
+    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -978,7 +740,7 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    // ── PROGRESS BAR ANIMATE ON SCROLL ──
+    // Progress bar
     const progressFill = document.getElementById('progress-fill');
     const progressVisual = document.getElementById('progress-visual');
     const progressObserver = new IntersectionObserver((entries) => {
