@@ -158,18 +158,20 @@
       max-width: 820px;
     }
 
-    /* Season 2024 badge */
+    /* Season 2024 badge — bottom right corner of hero */
     .season-badge {
-      display: inline-block;
-      margin-bottom: 2rem;
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3;
     }
     .season-badge img {
-      height: 90px;
+      height: 80px;
       width: auto;
       filter:
         invert(1)
-        drop-shadow(0 2px 12px rgba(201,168,76,0.5));
-      opacity: 0.92;
+        drop-shadow(0 2px 12px rgba(201,168,76,0.4));
+      opacity: 0.75;
     }
 
     .hero-eyebrow {
@@ -512,18 +514,15 @@
     <div class="hero-bg"></div>
     <div class="embers" id="embers"></div>
     <div class="hero-content">
-
-      <!-- Summer Season 2024 badge from captured image -->
-      <div class="season-badge">
-        <img src="season-2024.jpg" alt="Summer Season 2024" />
-      </div>
-
       <p class="hero-eyebrow">Meta Quest · Superbright · Unofficial Fan Guide</p>
-      <h1 class="hero-title">In Death</h1>
-      <p class="hero-subtitle">Unchained</p>
       <div class="rune-divider"><span>✦ ✦ ✦</span></div>
       <p class="hero-desc">The afterlife has fallen. Heaven is forsaken. Only your bow — and your will to die and rise again — stands between creation and eternal damnation.</p>
       <a href="#overview" class="hero-cta">Enter the Afterlife</a>
+    </div>
+
+    <!-- Season 2024 badge — bottom right -->
+    <div class="season-badge">
+      <img src="season-2024.jpg" alt="Summer Season 2024" />
     </div>
   </header>
 
