@@ -448,6 +448,97 @@
     .milestone-pct { font-family: var(--font-title); font-size: 0.72rem; color: var(--gold-dim); letter-spacing: 0.1em; }
     .milestone-label { font-family: var(--font-title); font-size: 0.62rem; color: var(--ash); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
 
+    /* ── WALKTHROUGHS ── */
+    .walkthroughs-section { background: var(--black); }
+
+    .walkthrough-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5px;
+      margin-top: 3rem;
+      border: 1.5px solid var(--stone-light);
+    }
+
+    .walkthrough-card {
+      background: var(--stone-dark);
+      transition: background 0.3s;
+    }
+    .walkthrough-card:hover { background: var(--stone-mid); }
+
+    .walkthrough-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .walkthrough-zone {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 2;
+      font-family: var(--font-title);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold-dim);
+      padding: 0.25rem 0.7rem;
+      pointer-events: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, var(--stone-dark) 0%, var(--black) 100%);
+      border-bottom: 1px solid var(--stone-light);
+    }
+
+    .video-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--gold-dim);
+      padding-left: 3px;
+    }
+
+    .video-coming {
+      font-family: var(--font-title);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--stone-light);
+      filter: brightness(2.5);
+    }
+
+    .walkthrough-info { padding: 1.4rem 1.6rem 1.8rem; }
+
+    .walkthrough-title {
+      font-family: var(--font-title);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .walkthrough-desc {
+      font-size: 0.9rem;
+      color: var(--ash);
+      line-height: 1.65;
+    }
+
     /* ── COMING SOON ── */
     .coming-section { background: var(--stone-dark); text-align: center; padding: 4rem 2rem; }
     .coming-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2.5rem; }
@@ -504,6 +595,7 @@
         <li><a href="#worlds">Worlds</a></li>
         <li><a href="#weapons">Weapons</a></li>
         <li><a href="#modes">Game Modes</a></li>
+        <li><a href="#walkthroughs">Walkthroughs</a></li>
         <li><a href="#death">The Loop</a></li>
       </ul>
     </div>
@@ -681,6 +773,109 @@
 
   <div class="stone-divider"></div>
 
+  <div class="stone-divider"></div>
+
+  <!-- GAME WALKTHROUGHS -->
+  <section class="walkthroughs-section" id="walkthroughs">
+    <div class="section-inner">
+      <p class="section-label reveal">Video Guides</p>
+      <h2 class="section-title reveal">Game <span>Walkthroughs</span></h2>
+      <p class="section-body reveal">Step-by-step video walkthroughs recorded on the Meta Quest 3S — Summer Season 2024. Each video covers a specific zone, boss, or mechanic in detail. More videos added regularly.</p>
+
+      <div class="walkthrough-grid">
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">World I</span>
+            <iframe
+              src="https://www.youtube.com/embed/zmnd6SUvF9A"
+              title="Purgatory — Full Walkthrough"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="position:absolute; inset:0; width:100%; height:100%; border:0;">
+            </iframe>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">Purgatory — Full Walkthrough</p>
+            <p class="walkthrough-desc">Cathedral platforms, monk patrols, knight encounters, and the path to Anakim the Abominable. Everything a new archer needs to survive the first world.</p>
+          </div>
+        </div>
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">World II</span>
+            <div class="video-placeholder">
+              <div class="video-icon">▶</div>
+              <p class="video-coming">Video Coming Soon</p>
+            </div>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">Desolation — Full Walkthrough</p>
+            <p class="walkthrough-desc">The alternate route through catacombs and outdoor passages. New enemy types including aerial threats that require a different approach than Purgatory.</p>
+          </div>
+        </div>
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">World III</span>
+            <div class="video-placeholder">
+              <div class="video-icon">▶</div>
+              <p class="video-coming">Video Coming Soon</p>
+            </div>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">Paradise Lost — Full Walkthrough</p>
+            <p class="walkthrough-desc">Marble corridors and open heavenly architecture. Banshees, Cupids, and the road to Gabriel the Fallen. The game's difficulty steps up significantly here.</p>
+          </div>
+        </div>
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">World IV</span>
+            <div class="video-placeholder">
+              <div class="video-icon">▶</div>
+              <p class="video-coming">Video Coming Soon</p>
+            </div>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">The Abyss — Full Walkthrough</p>
+            <p class="walkthrough-desc">The deep end. Hell made architecture. Surviving the Abyss and defeating Asmodeus the Destroyer to unlock Wrath of God and enter Purgatory II.</p>
+          </div>
+        </div>
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">Boss Fight</span>
+            <div class="video-placeholder">
+              <div class="video-icon">▶</div>
+              <p class="video-coming">Video Coming Soon</p>
+            </div>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">Asmodeus the Destroyer — Boss Guide</p>
+            <p class="walkthrough-desc">The ultimate challenge. Arrow loadout recommendations, positioning, and the tactics needed to bring down the lord of the Abyss.</p>
+          </div>
+        </div>
+
+        <div class="walkthrough-card reveal">
+          <div class="walkthrough-thumb">
+            <span class="walkthrough-zone">Siege Mode</span>
+            <div class="video-placeholder">
+              <div class="video-icon">▶</div>
+              <p class="video-coming">Video Coming Soon</p>
+            </div>
+          </div>
+          <div class="walkthrough-info">
+            <p class="walkthrough-title">Siege of Heaven — Beginner Guide</p>
+            <p class="walkthrough-desc">How to get started in wave-defence mode. Positioning, arrow selection, and surviving the escalating waves without teleport navigation.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- COMING SOON -->
   <section class="coming-section">
     <div class="section-inner">
@@ -690,12 +885,10 @@
       <div class="coming-grid">
         <div class="coming-pill">Arrow Guide</div>
         <div class="coming-pill">Enemy Bestiary</div>
-        <div class="coming-pill">Purgatory Walkthrough</div>
         <div class="coming-pill">Desolation Walkthrough</div>
         <div class="coming-pill">Paradise Lost Walkthrough</div>
         <div class="coming-pill">The Abyss Walkthrough</div>
         <div class="coming-pill">Boss Strategies</div>
-        <div class="coming-pill">Gameplay Videos</div>
         <div class="coming-pill">Tips &amp; Tricks</div>
         <div class="coming-pill">Seasons &amp; Leaderboards</div>
       </div>
